@@ -13,6 +13,17 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 public class login
 {
+    public static Connection connect() {
+        //Making Database Connection once & using multiple times whenever required.
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection con =DriverManager.getConnection("jdbc:mysql://localhost:3306/cutmlibrary", "root", "yourpassword");
+            return con;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
     public static void main(String[] args) {
         
         
