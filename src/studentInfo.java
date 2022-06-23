@@ -12,6 +12,7 @@ import java.util.concurrent.TimeUnit;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 public class studentInfo {
+<<<<<<< Updated upstream
 public static void main(String[] args) {
     
 }
@@ -26,4 +27,10 @@ public static Connection connect() {
   }
   return null;
 }
+=======
+
+  public static void student(String uID) {
+  }
+
+>>>>>>> Stashed changes
 }
