@@ -7,17 +7,17 @@ import java.sql.*;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 public class studentInfo {
-public static Connection connect() {
-  //Making Database Connection once & using multiple times whenever required.
-  try {
-      Class.forName("com.mysql.jdbc.Driver");
-      Connection con =DriverManager.getConnection("jdbc:mysql://localhost:3306/cutmlibrary", "root", "yourpassword");
-      return con;
-  } catch (Exception ex) {
-      ex.printStackTrace();
-  }
-  return null;
-}
+    
+        public static Connection connect() {
+            try {
+                Class.forName("com.mysql.cj.jdbc.Driver");
+                Connection con =DriverManager.getConnection("jdbc:mysql://localhost:3306/cutmlibrary", "root", "bubu@098");
+                return con;
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+            return null;
+        }
 public void students(String UID) {
 
 
