@@ -69,7 +69,7 @@ public class library_management
                 else {
                     Connection connection = connect();
                     try {
-                        Statement stmt = connection.createStatement();
+                        Statement stmt = connection.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, CONCURE_READ_ONLY);
                         String un= "select * from users where username="+username+"& password="+password;
                         ResultSet rs = stmt.executeQuery(un);
                         if (rs.next() == false) { 
