@@ -24,9 +24,6 @@ public class library_management
         JLabel l1 = new JLabel("Username", SwingConstants.CENTER);
         l1.setBackground(Color.pink);
         l1.setForeground(Color.black);
-        JPanel cp = new JPanel();
-        cp.setBorder(new EmptyBorder(5,5,5,5));
-        cp.setLayout(null);
         JLabel l2 = new JLabel("Password", SwingConstants.CENTER);
         l2.setBackground(Color.pink);
         l2.setForeground(Color.black);
@@ -48,7 +45,7 @@ public class library_management
         loginFrame.add(passwordTF);
         loginFrame.add(cancelBtn);
         loginFrame.add(loginBtn);
-        loginFrame.setLayout(new GridLayout(3, 2));
+        loginFrame.setLayout(new GridLayout(3, 1));
         loginFrame.setVisible(true);
         loginFrame.setResizable(false);
         loginFrame.setBounds(750, 300, 400, 240);
@@ -82,12 +79,13 @@ public class library_management
                             loginFrame.dispose();
                             rs.beforeFirst(); 
                             while (rs.next()) {
-                                String user = rs.getString("user_type");
-                                String USER_ID = rs.getString("UID"); 
-                                if (user.equals("1")) { 
-                                    System.out.println("admin");
+                                String user_type= rs.getString("user_type");
+                                String UID = rs.getString("UID"); 
+                                if (user_type.equals("1")) { 
+                                    
                                 } else {
-                                    System.out.println("student");
+                                    
+                                    
 
                                    
                                 }
