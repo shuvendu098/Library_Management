@@ -35,6 +35,12 @@ public class adminsupport {
     JButton addnew_book_btn=new JButton("Add New Books");
     addnew_book_btn.setBackground(Color.blue);
     addnew_book_btn.setForeground(Color.black);
+    addnew_book_btn.addActionListener(new ActionListener(){
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            as.addBook();
+        }
+    });
 
     JButton add_book_btn=new JButton("Add Existing Books");
     add_book_btn.setBackground(Color.blue);
@@ -204,6 +210,120 @@ public void addBook(){
 }
 
 public void addNewBook(){
+    JFrame book_frame = new JFrame("Enter Book Details");
+            JLabel l1, l2, l3, l4, l5, l6, l7,l8;
+            l1 = new JLabel("ISBN", SwingConstants.CENTER);
+            l1.setOpaque(true);
+            l1.setBackground(Color.yellow);
+            l1.setForeground(Color.black);
+            l2 = new JLabel("Name", SwingConstants.CENTER);
+            l2.setOpaque(true);
+            l2.setBackground(Color.yellow);
+            l2.setForeground(Color.black);
+            l3 = new JLabel("Publisher", SwingConstants.CENTER);
+            l3.setOpaque(true);
+            l3.setBackground(Color.yellow);
+            l3.setForeground(Color.black);
+            l4 = new JLabel("Edition", SwingConstants.CENTER);
+            l4.setOpaque(true);
+            l4.setBackground(Color.yellow);
+            l4.setForeground(Color.black);
+            l5 = new JLabel("Genre", SwingConstants.CENTER);
+            l5.setOpaque(true);
+            l5.setBackground(Color.yellow);
+            l5.setForeground(Color.black);
+            l6 = new JLabel("Price", SwingConstants.CENTER);
+            l6.setOpaque(true);
+            l6.setBackground(Color.yellow);
+            l6.setForeground(Color.black);
+            l7 = new JLabel("Pages", SwingConstants.CENTER);
+            l7.setOpaque(true);
+            l7.setBackground(Color.yellow);
+            l7.setForeground(Color.black);
+            l8 = new JLabel("Number of Books", SwingConstants.CENTER);
+            l8.setOpaque(true);
+            l8.setBackground(Color.yellow);
+            l8.setForeground(Color.black);
+            JTextField book_isbn_tf = new JTextField();
+            book_isbn_tf.setBackground( Color.white);
+            book_isbn_tf.setForeground(Color.blue);
+            JTextField book_name_tf = new JTextField();
+            book_name_tf.setBackground( Color.white);
+            book_name_tf.setForeground(Color.blue);
+            JTextField book_publisher_tf = new JTextField();
+            book_publisher_tf.setBackground( Color.white);
+            book_publisher_tf.setForeground(Color.blue);
+            JTextField book_edition_tf = new JTextField();
+            book_edition_tf.setBackground( Color.white);
+            book_edition_tf.setForeground(Color.blue);
+            JTextField book_genre_tf = new JTextField();
+            book_genre_tf.setBackground( Color.white);
+            book_genre_tf.setForeground(Color.blue);
+            JTextField book_price_tf = new JTextField();
+            book_price_tf.setBackground( Color.white);
+            book_price_tf.setForeground(Color.blue);
+            JTextField book_pages_tf = new JTextField();
+            book_pages_tf.setBackground( Color.white);
+            book_pages_tf.setForeground(Color.blue);
+            JTextField booksnumber_tf = new JTextField();
+            book_pages_tf.setBackground( Color.white);
+            book_pages_tf.setForeground(Color.blue);
+            JButton submit_btn = new JButton("Submit");
+            submit_btn.setBackground(Color.blue);
+            submit_btn.setForeground(Color.white);
+            submit_btn.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    String book_isbn = book_isbn_tf.getText();
+                    String book_name = book_name_tf.getText();
+                    String book_publisher = book_publisher_tf.getText();
+                    String book_edition = book_edition_tf.getText();
+                    String book_genre = book_genre_tf.getText();
+                    int book_price = Integer.parseInt(book_price_tf.getText());
+                    int book_pages = Integer.parseInt(book_pages_tf.getText());
+                    Connection connection = connect();
+                    try {
+                        Statement stmt = connection.createStatement();
+                        stmt.executeUpdate("INSERT INTO BOOKS(book_isbn,book_name,book_publisher,book_edition,book_genre,book_price,book_pages)"
+                                + " VALUES ('" + book_isbn + "','" + book_name + "','" + book_publisher + "','" + book_edition + "','" + book_genre + "','" + book_price + "'," + book_pages + ")");
+                        JOptionPane.showMessageDialog(null, "Book added!");
+                        book_frame.dispose();
+                    } catch (Exception e1) {
+                        JOptionPane.showMessageDialog(null, e1);
+                    }
+                }
+            });
+            JButton add_book_cancel_btn = new JButton("Cancel");
+            add_book_cancel_btn.setBackground(Color.red);
+            add_book_cancel_btn.setForeground(Color.white);
+            add_book_cancel_btn.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    book_frame.dispose();
+                }
+            });
+            book_frame.add(l1);
+            book_frame.add(book_isbn_tf);
+            book_frame.add(l2);
+            book_frame.add(book_name_tf);
+            book_frame.add(l3);
+            book_frame.add(book_publisher_tf);
+            book_frame.add(l4);
+            book_frame.add(book_edition_tf);
+            book_frame.add(l5);
+            book_frame.add(book_genre_tf);
+            book_frame.add(l6);
+            book_frame.add(book_price_tf);
+            book_frame.add(l7);
+            book_frame.add(book_pages_tf);
+            book_frame.add(l8);
+            book_frame.add(booksnumber_tf);
+            book_frame.add(submit_btn);
+            book_frame.add(add_book_cancel_btn);
+            book_frame.setBounds(300,200,600,300);
+            book_frame.setLayout(new GridLayout(9, 2));
+            book_frame.setVisible(true);
+            book_frame.setResizable(true);
 
 }
 public void issueABook(){
