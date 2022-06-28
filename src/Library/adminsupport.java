@@ -31,14 +31,13 @@ public class adminsupport {
     JButton add_return_book_btn=new JButton("Return a Book");
     add_return_book_btn.setBackground(Color.blue);
     add_return_book_btn.setForeground(Color.black);
-
     JButton addnew_book_btn=new JButton("Add New Books");
     addnew_book_btn.setBackground(Color.blue);
     addnew_book_btn.setForeground(Color.black);
     addnew_book_btn.addActionListener(new ActionListener(){
         @Override
         public void actionPerformed(ActionEvent e) {
-            as.addBook();
+            as.addNewBook();
         }
     });
 
@@ -281,10 +280,11 @@ public void addNewBook(){
                     String book_genre = book_genre_tf.getText();
                     int book_price = Integer.parseInt(book_price_tf.getText());
                     int book_pages = Integer.parseInt(book_pages_tf.getText());
+                    int book_count=Integer.parseInt(booksnumber_tf.getText());
                     Connection connection = connect();
                     try {
-                        Statement stmt = connection.createStatement();
-                        stmt.executeUpdate("INSERT INTO BOOKS(book_isbn,book_name,book_publisher,book_edition,book_genre,book_price,book_pages)"
+                        Statement stmt = connection.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
+                        stmt.executeUpdate("INSERT INTO BOOKS(book_isbn,book_name,book_publisher,book_edition,book_genre,book_price,book_pages,book_count)"
                                 + " VALUES ('" + book_isbn + "','" + book_name + "','" + book_publisher + "','" + book_edition + "','" + book_genre + "','" + book_price + "'," + book_pages + ")");
                         JOptionPane.showMessageDialog(null, "Book added!");
                         book_frame.dispose();
