@@ -26,14 +26,14 @@ public class adminsupport {
     JFrame admin_frame=new JFrame("Centurion University Library");
     JButton add_issue_book_btn=new JButton("Issue a Book");
     add_issue_book_btn.setBackground(Color.blue);
-    add_issue_book_btn.setForeground(Color.black);
+    add_issue_book_btn.setForeground(Color.white);
 
     JButton add_return_book_btn=new JButton("Return a Book");
     add_return_book_btn.setBackground(Color.blue);
-    add_return_book_btn.setForeground(Color.black);
+    add_return_book_btn.setForeground(Color.white);
     JButton addnew_book_btn=new JButton("Add New Books");
     addnew_book_btn.setBackground(Color.blue);
-    addnew_book_btn.setForeground(Color.black);
+    addnew_book_btn.setForeground(Color.white);
     addnew_book_btn.addActionListener(new ActionListener(){
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -43,11 +43,11 @@ public class adminsupport {
 
     JButton add_book_btn=new JButton("Add Existing Books");
     add_book_btn.setBackground(Color.blue);
-    add_book_btn.setForeground(Color.black);
+    add_book_btn.setForeground(Color.white);
 
     JButton view_users_btn=new JButton("View Users");
     view_users_btn.setBackground(Color.blue);
-    view_users_btn.setForeground(Color.black);
+    view_users_btn.setForeground(Color.white);
     view_users_btn.addActionListener(new ActionListener(){
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -58,7 +58,7 @@ public class adminsupport {
 
     JButton view_books_btn=new JButton("View Books");
     view_books_btn.setBackground(Color.blue);
-    view_books_btn.setForeground(Color.black);
+    view_books_btn.setForeground(Color.white);
     view_books_btn.addActionListener(new ActionListener(){
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -69,15 +69,15 @@ public class adminsupport {
 
     JButton view_issued_books_btn=new JButton("View Issued Books");
     view_issued_books_btn.setBackground(Color.blue);
-    view_issued_books_btn.setForeground(Color.black);
+    view_issued_books_btn.setForeground(Color.white);
 
     JButton view_returned_books_btn=new JButton("View Returned Books");
     view_returned_books_btn.setBackground(Color.blue);
-    view_returned_books_btn.setForeground(Color.black);
+    view_returned_books_btn.setForeground(Color.white);
 
     JButton add_user_btn=new JButton("Add Admin/Student");
     add_user_btn.setBackground(Color.blue);
-    add_user_btn.setForeground(Color.black);
+    add_user_btn.setForeground(Color.white);
     add_user_btn.addActionListener(new ActionListener(){
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -122,31 +122,31 @@ public class adminsupport {
     JFrame add_user_frame = new JFrame("Enter User Details"); 
     JLabel l1 = new JLabel("Username", SwingConstants.CENTER);
     l1.setOpaque(true);
-    l1.setBackground(new Color(51, 35, 85));
-    l1.setForeground(Color.white); 
+    l1.setBackground(Color.yellow);
+    l1.setForeground(Color.black); 
     JLabel l2 = new JLabel("Password", SwingConstants.CENTER);
     l2.setOpaque(true);
-    l2.setBackground(new Color(51, 35, 85));
-    l2.setForeground(Color.white);
+    l2.setBackground(Color.yellow);
+    l2.setForeground(Color.black);
     JTextField add_username_tf = new JTextField();
     add_username_tf.setBackground(Color.white);
     add_username_tf.setForeground(Color.blue);
     JPasswordField add_password_tf = new JPasswordField();
     add_password_tf.setBackground(Color.white);
     add_password_tf.setForeground(Color.blue);
-    JRadioButton user_type_radio1 = new JRadioButton("Admin");
-    user_type_radio1.setHorizontalAlignment(SwingConstants.CENTER);
-    user_type_radio1.setBackground(new Color(51, 35, 85));
-    user_type_radio1.setForeground(Color.white);
-    JRadioButton user_type_radio2 = new JRadioButton("User");
-    user_type_radio2.setHorizontalAlignment(SwingConstants.CENTER);
-    user_type_radio2.setBackground(new Color(51, 35, 85));
-    user_type_radio2.setForeground(Color.white);
-    ButtonGroup user_type_btn_grp = new ButtonGroup();
-    user_type_btn_grp.add(user_type_radio1);
-    user_type_btn_grp.add(user_type_radio2);
-    JButton create_btn = new JButton("Create");
-    create_btn.setBackground(new Color(124, 85, 227));
+    JRadioButton admin_radio1 = new JRadioButton("Admin");
+    admin_radio1.setHorizontalAlignment(SwingConstants.CENTER);
+    admin_radio1.setBackground(Color.cyan);
+    admin_radio1.setForeground(Color.black);
+    JRadioButton student_radio2 = new JRadioButton("Student");
+    student_radio2.setHorizontalAlignment(SwingConstants.CENTER);
+    student_radio2.setBackground(Color.CYAN);
+    student_radio2.setForeground(Color.black);
+    ButtonGroup btn_grp = new ButtonGroup();
+    btn_grp.add(admin_radio1);
+    btn_grp.add(student_radio2);
+    JButton create_btn = new JButton("Submit");
+    create_btn.setBackground(Color.blue);
     create_btn.setForeground(Color.white);
     create_btn.addActionListener(new ActionListener() {
         @Override
@@ -156,13 +156,13 @@ public class adminsupport {
             Connection connection = connect();
             try {
                 Statement stmt = connection.createStatement();
-                if (user_type_radio1.isSelected()) {
+                if (admin_radio1.isSelected()) {
                     stmt.executeUpdate("INSERT INTO USERS(USERNAME,PASSWORD,USER_TYPE) VALUES ('" + username + "','" + password + "','" + "1" + "')");
                     JOptionPane.showMessageDialog(null, "Admin added!");
                     add_user_frame.dispose();
                 } else {
                     stmt.executeUpdate("INSERT INTO USERS(USERNAME,PASSWORD,USER_TYPE) VALUES ('" + username + "','" + password + "','" + "0" + "')");
-                    JOptionPane.showMessageDialog(null, "User added!");
+                    JOptionPane.showMessageDialog(null, "Student added!");
                     add_user_frame.dispose();
                 }
             } catch (Exception e1) {
@@ -170,17 +170,18 @@ public class adminsupport {
             }
         }
     });
-    JButton user_entry_cancel_btn = new JButton("Cancel");
-    user_entry_cancel_btn.setBackground(new Color(124, 85, 227));
-    user_entry_cancel_btn.setForeground(Color.white);
+    JButton cancel_btn = new JButton("Cancel");
+    cancel_btn.setBackground(Color.red);
+    cancel_btn.setForeground(Color.white);
+
     add_user_frame.add(l1);
     add_user_frame.add(add_username_tf);
     add_user_frame.add(l2);
     add_user_frame.add(add_password_tf);
-    add_user_frame.add(user_type_radio1);
-    add_user_frame.add(user_type_radio2);
+    add_user_frame.add(admin_radio1);
+    add_user_frame.add(student_radio2);
+    add_user_frame.add(cancel_btn);
     add_user_frame.add(create_btn);
-    add_user_frame.add(user_entry_cancel_btn);
     add_user_frame.setBounds(300,200,600,200);
     add_user_frame.setLayout(new GridLayout(4, 2));
     add_user_frame.setVisible(true);
@@ -356,8 +357,7 @@ public void addNewBook(){
                     Connection connection = connect();
                     try {
                         Statement stmt = connection.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
-                        stmt.executeUpdate("INSERT INTO BOOKS(book_isbn,book_name,book_publisher,book_edition,book_genre,book_price,book_pages,book_count)"
-                                + " VALUES ('" + book_isbn + "','" + book_name + "','" + book_publisher + "','" + book_edition + "','" + book_genre + "','" + book_price + "'," + book_pages + ")");
+                        stmt.executeUpdate("INSERT INTO BOOKS(book_isbn,book_name,book_publisher,book_edition,book_genre,book_price,book_pages,book_count) VALUES ('" + book_isbn + "','" + book_name + "','" + book_publisher + "','" + book_edition + "','" + book_genre + "','" + book_price + "','" + book_pages + "','"+book_count+")");
                         JOptionPane.showMessageDialog(null, "Book added!");
                         book_frame.dispose();
                     } catch (Exception e1) {
