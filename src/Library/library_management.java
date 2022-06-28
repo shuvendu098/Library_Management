@@ -48,12 +48,6 @@ public class library_management
         loginFrame.setVisible(true);
         loginFrame.setResizable(false);
         loginFrame.setBounds(750, 300, 400, 240);
-
-
-
-
-
-
         loginBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

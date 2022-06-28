@@ -18,8 +18,6 @@ public class studentInfo {
             }
             return null;
         }
-public void students(String UID) {
-
-
+public static void main(String uID) {
 }
 }
