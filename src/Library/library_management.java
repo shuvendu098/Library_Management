@@ -5,7 +5,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.*;
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
 public class library_management
 {
     public static Connection connect() {
@@ -69,8 +68,8 @@ public class library_management
                 else {
                     Connection connection = connect();
                     try {
-                        Statement stmt = connection.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, CONCURE_READ_ONLY);
-                        String un= "select * from users where username="+username+"& password="+password;
+                        Statement stmt = connection.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
+                        String un=("SELECT * FROM USERS WHERE USERNAME='" + username + "' AND PASSWORD='" + password + "'");
                         ResultSet rs = stmt.executeQuery(un);
                         if (rs.next() == false) { 
                             JOptionPane.showMessageDialog(null, "Invalid Username!"); 
@@ -82,12 +81,9 @@ public class library_management
                                 String user_type= rs.getString("user_type");
                                 String UID = rs.getString("UID"); 
                                 if (user_type.equals("1")) { 
-                                    
+                                    adminsupport.main(UID);
                                 } else {
-                                    
-                                    
-
-                                   
+                                    studentInfo.main(UID);
                                 }
                             }
                         }
