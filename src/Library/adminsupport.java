@@ -79,6 +79,12 @@ public class adminsupport {
     JButton add_user_btn=new JButton("Add Admin/Student");
     add_user_btn.setBackground(Color.blue);
     add_user_btn.setForeground(Color.black);
+    add_user_btn.addActionListener(new ActionListener(){
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            as.addUser();
+        }
+    });
 
     JButton LOGOUT= new JButton("LOGOUT");
     LOGOUT.setBackground(Color.red);
@@ -114,6 +120,72 @@ public class adminsupport {
 
   
   public void addUser(){
+    JFrame add_user_frame = new JFrame("Enter User Details"); 
+    JLabel l1 = new JLabel("Username", SwingConstants.CENTER);
+    l1.setOpaque(true);
+    l1.setBackground(new Color(51, 35, 85));
+    l1.setForeground(Color.white); 
+    JLabel l2 = new JLabel("Password", SwingConstants.CENTER);
+    l2.setOpaque(true);
+    l2.setBackground(new Color(51, 35, 85));
+    l2.setForeground(Color.white);
+    JTextField add_username_tf = new JTextField();
+    add_username_tf.setBackground(Color.white);
+    add_username_tf.setForeground(Color.blue);
+    JPasswordField add_password_tf = new JPasswordField();
+    add_password_tf.setBackground(Color.white);
+    add_password_tf.setForeground(Color.blue);
+    JRadioButton user_type_radio1 = new JRadioButton("Admin");
+    user_type_radio1.setHorizontalAlignment(SwingConstants.CENTER);
+    user_type_radio1.setBackground(new Color(51, 35, 85));
+    user_type_radio1.setForeground(Color.white);
+    JRadioButton user_type_radio2 = new JRadioButton("User");
+    user_type_radio2.setHorizontalAlignment(SwingConstants.CENTER);
+    user_type_radio2.setBackground(new Color(51, 35, 85));
+    user_type_radio2.setForeground(Color.white);
+    ButtonGroup user_type_btn_grp = new ButtonGroup();
+    user_type_btn_grp.add(user_type_radio1);
+    user_type_btn_grp.add(user_type_radio2);
+    JButton create_btn = new JButton("Create");
+    create_btn.setBackground(new Color(124, 85, 227));
+    create_btn.setForeground(Color.white);
+    create_btn.addActionListener(new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            String username = add_username_tf.getText();
+            String password = add_password_tf.getText();
+            Connection connection = connect();
+            try {
+                Statement stmt = connection.createStatement();
+                if (user_type_radio1.isSelected()) {
+                    stmt.executeUpdate("INSERT INTO USERS(USERNAME,PASSWORD,USER_TYPE) VALUES ('" + username + "','" + password + "','" + "1" + "')");
+                    JOptionPane.showMessageDialog(null, "Admin added!");
+                    add_user_frame.dispose();
+                } else {
+                    stmt.executeUpdate("INSERT INTO USERS(USERNAME,PASSWORD,USER_TYPE) VALUES ('" + username + "','" + password + "','" + "0" + "')");
+                    JOptionPane.showMessageDialog(null, "User added!");
+                    add_user_frame.dispose();
+                }
+            } catch (Exception e1) {
+                JOptionPane.showMessageDialog(null, e1);
+            }
+        }
+    });
+    JButton user_entry_cancel_btn = new JButton("Cancel");
+    user_entry_cancel_btn.setBackground(new Color(124, 85, 227));
+    user_entry_cancel_btn.setForeground(Color.white);
+    add_user_frame.add(l1);
+    add_user_frame.add(add_username_tf);
+    add_user_frame.add(l2);
+    add_user_frame.add(add_password_tf);
+    add_user_frame.add(user_type_radio1);
+    add_user_frame.add(user_type_radio2);
+    add_user_frame.add(create_btn);
+    add_user_frame.add(user_entry_cancel_btn);
+    add_user_frame.setBounds(300,200,600,200);
+    add_user_frame.setLayout(new GridLayout(4, 2));
+    add_user_frame.setVisible(true);
+    add_user_frame.setResizable(true);
 
 }
 
