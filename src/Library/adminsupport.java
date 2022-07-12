@@ -36,6 +36,12 @@ public class adminsupport {
         JButton add_return_book_btn = new JButton("Return a Book");
         add_return_book_btn.setBackground(Color.blue);
         add_return_book_btn.setForeground(Color.white);
+        add_return_book_btn.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e){
+                as.showReturnedBook();
+            }
+        });
         JButton addnew_book_btn = new JButton("Add New Books");
         addnew_book_btn.setBackground(Color.blue);
         addnew_book_btn.setForeground(Color.white);
@@ -514,6 +520,39 @@ public class adminsupport {
     }
 
     public void showReturnedBook() {
+        JFrame returnedBooksFrame = new JFrame("Returned Books List");
+    Connection connection=connect();
+    String sql=("select * from returned_books");
+    try {
+        Statement stmt=connection.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
+        ResultSet rs=stmt.executeQuery(sql);
+        JTable returned_book_list = new JTable();
+        String[] returnBookColumnNames = {"Return ID", "Book ID", "Student/Admin ID", "Return Date", "Fine"};
+        DefaultTableModel returnBookModel = new DefaultTableModel();
+        returnBookModel.setColumnIdentifiers(returnBookColumnNames);
+        returned_book_list.setModel(returnBookModel);
+        returned_book_list.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
+        returned_book_list.setFillsViewportHeight(true);
+        returned_book_list.setFocusable(false);
+        returned_book_list.setBackground(Color.white);
+        returned_book_list.setForeground(Color.blue);
+        JScrollPane scrollReturnedBook = new JScrollPane(returned_book_list);
+        scrollReturnedBook.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        scrollReturnedBook.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+        while(rs.next()){
+            int return_id=rs.getInt(1);
+            int book_id=rs.getInt(2);
+            int id=rs.getInt(3);
+            String date=rs.getString(4);
+            int fine=rs.getInt(5);
+            returnBookModel.addRow(new Object[]{return_id,book_id,id,date,fine});
+        }
+        returnedBooksFrame.add(scrollReturnedBook);
+        returnedBooksFrame.setBounds(700,300,700,300);
+        returnedBooksFrame.setVisible(true);
+    } catch (Exception e1) {
+        JOptionPane.showMessageDialog(null, e1);
+    }
 
     }
 }
