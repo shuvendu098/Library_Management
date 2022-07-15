@@ -30,7 +30,7 @@ public class adminsupport {
         add_issue_book_btn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                as.returnABook();
+                as.issueABook();
             }
         });
         JButton add_return_book_btn = new JButton("Return a Book");
@@ -399,6 +399,80 @@ public class adminsupport {
     }
 
     public void issueABook() {
+        JFrame issue_book_frame = new JFrame("Enter Details");
+            JLabel l1, l2, l3, l4;
+            l1 = new JLabel("Book ID", SwingConstants.CENTER);
+            l1.setOpaque(true);
+            l1.setBackground(Color.yellow);
+            l1.setForeground(Color.black);
+            l2 = new JLabel("Student ID", SwingConstants.CENTER);
+            l2.setOpaque(true);
+            l2.setBackground(Color.yellow);
+            l2.setForeground(Color.black);
+            l3 = new JLabel("Period(days)", SwingConstants.CENTER);
+            l3.setOpaque(true);
+            l3.setBackground(Color.yellow);
+            l3.setForeground(Color.black);
+            l4 = new JLabel("Issued Date(DD-MM-YYYY)", SwingConstants.CENTER);
+            l4.setOpaque(true);
+            l4.setBackground(Color.yellow);
+            l4.setForeground(Color.black);
+            JTextField book_id = new JTextField();
+            book_id.setBackground(Color.white);
+            book_id.setForeground(Color.blue);
+            JTextField stu_id = new JTextField();
+            stu_id.setBackground(Color.white);
+            stu_id.setForeground(Color.blue);
+            JTextField Time_period= new JTextField();
+            Time_period.setBackground(Color.white);
+            Time_period.setForeground(Color.blue);
+            JTextField c_date=new JTextField();
+           c_date.setBackground(Color.white);
+            c_date.setForeground(Color.blue);
+            JButton submit_btn = new JButton("Submit");
+            submit_btn.setBackground(Color.blue);
+            submit_btn.setForeground(Color.white);
+            submit_btn.addActionListener(new ActionListener(){
+                public void actionPerformed(ActionEvent e){
+                    int bid = Integer.parseInt(book_id.getText());
+                    int uid=Integer.parseInt(stu_id.getText());
+                    String period = Time_period.getText();
+                    String date=c_date.getText();
+                    Connection connection = connect();
+                    try{
+                        Statement stmt=connection.createStatement();
+                        stmt.executeUpdate("INSERT INTO `issued_books`(`UID`,`BID`,`ISSUED_DATE`,`PERIOD`)VALUES('"+uid+"','"+bid+"','"+date+"','"+period+"')");
+                        JOptionPane.showMessageDialog(null,"Book Issued");
+                        issue_book_frame.dispose();
+                    }
+                    catch(Exception ex){
+                        JOptionPane.showMessageDialog(null,"Invalid details, try again.");
+
+                    }
+                }
+            });
+            JButton cancel_btn = new JButton("Cancel");
+            cancel_btn.setBackground(Color.RED);
+            cancel_btn.setForeground(Color.white);
+            cancel_btn.addActionListener(new ActionListener(){
+                public void actionPerformed(ActionEvent e){
+                    issue_book_frame.dispose();
+                }
+            });
+            issue_book_frame.add(l1);
+            issue_book_frame.add(book_id);
+            issue_book_frame.add(l2);
+            issue_book_frame.add(stu_id);
+            issue_book_frame.add(l3);
+            issue_book_frame.add(Time_period);
+            issue_book_frame.add(l4);
+            issue_book_frame.add(c_date);
+            issue_book_frame.add(cancel_btn);
+            issue_book_frame.add(submit_btn);
+            issue_book_frame.setBounds(700,300,400,300);
+            issue_book_frame.setLayout(new GridLayout(5, 2));
+            issue_book_frame.setVisible(true);
+            issue_book_frame.setResizable(false);
 
     }
 
